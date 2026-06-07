@@ -1,5 +1,19 @@
 # Talkable
 
+## Screenshots
+
+### Landing page
+![Talkable landing page](public/image-1.png)
+
+### Chrome extension popup
+![Talkable Chrome extension popup](public/image-2.png)
+
+### Floating voice control
+![Talkable floating voice control](public/image-3.png)
+
+### UI target selection
+![Talkable UI target selection](public/image-4.png)
+
 ## Overview
 Talkable is a voice-controlled Codex platform that lets non-technical users, marketing teams, sales teams, and product stakeholders request UI and dashboard changes using Voice . Instead of writing a detailed developer prompt or ticket, users can simply say what they want changed, watch the AI interpret the request, and send the resulting implementation work toward the development workflow.
 
@@ -49,23 +63,9 @@ Codex and OpenAI are core to the project:
 - API integration: OpenAI transcription converts recorded speech into text, OpenAI TTS can generate spoken confirmations, and the Codex SDK executes engineering tasks.
 
 ## Demo
-Add your demo or pitch video link here.
+[![Watch the Talkable demo](https://img.youtube.com/vi/A3HpWlMlpaY/maxresdefault.jpg)](https://youtu.be/A3HpWlMlpaY)
 
-Demo link: https://youtu.be/A3HpWlMlpaY
-
-## Screenshots
-
-### Landing page
-![Talkable landing page](public/image-1.png)
-
-### Chrome extension popup
-![Talkable Chrome extension popup](public/image-2.png)
-
-### Floating voice control
-![Talkable floating voice control](public/image-3.png)
-
-### UI target selection
-![Talkable UI target selection](public/image-4.png)
+Watch the demo: [https://youtu.be/A3HpWlMlpaY](https://youtu.be/A3HpWlMlpaY)
 
 ## How to Run Locally
 
@@ -145,5 +145,5 @@ docs             Product requirements and planning notes
 
 ## Notes
 - Repository: [github.com/unaisshemim/talkable](https://github.com/unaisshemim/talkable)
-- Demo video link will be added after recording.
+- Demo video: [https://youtu.be/A3HpWlMlpaY](https://youtu.be/A3HpWlMlpaY)
 - Database persistence is planned but not connected in the current local MVP.
