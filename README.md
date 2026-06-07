@@ -1,5 +1,10 @@
 # Talkable
 
+## Demo
+[![Watch the Talkable demo](https://img.youtube.com/vi/A3HpWlMlpaY/maxresdefault.jpg)](https://youtu.be/A3HpWlMlpaY)
+
+Watch the demo: [https://youtu.be/A3HpWlMlpaY](https://youtu.be/A3HpWlMlpaY)
+
 ## Screenshots
 
 ### Landing page
@@ -61,11 +66,6 @@ Codex and OpenAI are core to the project:
 - Testing: The repo includes TypeScript checks and build commands for validating the shared package, backend, and extension.
 - Documentation: This README documents the product concept, stack, local setup, and AI usage.
 - API integration: OpenAI transcription converts recorded speech into text, OpenAI TTS can generate spoken confirmations, and the Codex SDK executes engineering tasks.
-
-## Demo
-[![Watch the Talkable demo](https://img.youtube.com/vi/A3HpWlMlpaY/maxresdefault.jpg)](https://youtu.be/A3HpWlMlpaY)
-
-Watch the demo: [https://youtu.be/A3HpWlMlpaY](https://youtu.be/A3HpWlMlpaY)
 
 ## How to Run Locally
 
