@@ -51,7 +51,7 @@ Codex and OpenAI are core to the project:
 ## Demo
 Add your demo or pitch video link here.
 
-Demo link: `TODO`
+Demo link: https://youtu.be/A3HpWlMlpaY
 
 ## Screenshots
 
@@ -72,7 +72,7 @@ Demo link: `TODO`
 Requires Node.js 18 or later.
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/unaisshemim/talkable.git
 cd talkable
 npm install
 ```
@@ -144,7 +144,6 @@ docs             Product requirements and planning notes
 ```
 
 ## Notes
-- GitHub repository link will be added after the repository is created.
+- Repository: [github.com/unaisshemim/talkable](https://github.com/unaisshemim/talkable)
 - Demo video link will be added after recording.
-- Screenshots will be added after the final UI capture.
 - Database persistence is planned but not connected in the current local MVP.
