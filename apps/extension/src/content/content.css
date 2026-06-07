@@ -1,0 +1,805 @@
+@tailwind components;
+@tailwind utilities;
+
+#talkable-widget-root {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 2147483647;
+  color-scheme: light;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+#talkable-widget-root,
+#talkable-widget-root * {
+  box-sizing: border-box;
+}
+
+#talkable-widget-root button {
+  font: inherit;
+}
+
+.talkable-widget {
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 62%);
+  border-radius: 24px;
+  background:
+    linear-gradient(150deg, rgb(255 255 255 / 91%), rgb(246 248 255 / 78%)),
+    rgb(255 255 255 / 82%);
+  box-shadow:
+    0 24px 70px rgb(15 17 23 / 18%),
+    inset 0 1px 0 rgb(255 255 255 / 72%);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  color: #0f1117;
+  padding: 14px;
+}
+
+.talkable-widget[data-state="listening"] {
+  box-shadow:
+    0 26px 78px rgb(37 99 235 / 30%),
+    0 8px 28px rgb(15 17 23 / 10%),
+    inset 0 1px 0 rgb(255 255 255 / 72%);
+}
+
+.talkable-header,
+.talkable-brand,
+.talkable-header-actions,
+.talkable-live,
+.talkable-project,
+.talkable-target-card,
+.talkable-voice-card,
+.talkable-step-card,
+.talkable-footer,
+.talkable-footer button,
+.talkable-panel-header,
+.talkable-notes-toggle,
+.talkable-command-row,
+.talkable-target-actions {
+  display: flex;
+  align-items: center;
+}
+
+.talkable-header {
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.talkable-brand {
+  min-width: 0;
+  gap: 10px;
+}
+
+.talkable-wave {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #1d4ed8, #38bdf8);
+  color: #ffffff;
+  box-shadow: 0 10px 26px rgb(37 99 235 / 32%);
+}
+
+.talkable-brand-text {
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 850;
+  letter-spacing: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.talkable-header-actions {
+  gap: 8px;
+}
+
+.talkable-live {
+  gap: 6px;
+  border: 1px solid rgb(34 197 94 / 24%);
+  border-radius: 999px;
+  background: rgb(34 197 94 / 10%);
+  color: #138a40;
+  font-size: 12px;
+  font-weight: 850;
+  padding: 6px 9px;
+  white-space: nowrap;
+}
+
+.talkable-live span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 0 rgb(34 197 94 / 48%);
+  animation: talkable-live-pulse 1.5s ease-out infinite;
+}
+
+.talkable-live[data-live="false"] {
+  border-color: rgb(239 68 68 / 22%);
+  background: rgb(239 68 68 / 10%);
+  color: #b91c1c;
+}
+
+.talkable-live[data-live="false"] span {
+  background: #ef4444;
+  animation: none;
+}
+
+.talkable-icon-button {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgb(15 17 23 / 8%);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 64%);
+  color: #4b5563;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.talkable-icon-button:hover {
+  background: #ffffff;
+  color: #0f1117;
+  transform: translateY(-1px);
+}
+
+.talkable-project {
+  gap: 8px;
+  min-width: 0;
+  margin-top: 12px;
+  border: 1px solid rgb(15 17 23 / 7%);
+  border-radius: 18px;
+  background: rgb(255 255 255 / 58%);
+  color: #374151;
+  padding: 10px 12px;
+}
+
+.talkable-project svg {
+  flex: 0 0 auto;
+  color: #2563eb;
+}
+
+.talkable-project span {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 850;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.talkable-project-action,
+.talkable-pick-button,
+.talkable-command-primary,
+.talkable-command-danger,
+.talkable-undo-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 850;
+  white-space: nowrap;
+  transition:
+    background 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.talkable-project-action {
+  flex: 0 0 auto;
+  border-color: rgb(37 99 235 / 18%);
+  border-radius: 999px;
+  background: rgb(37 99 235 / 9%);
+  color: #1d4ed8;
+  font-size: 11px;
+  padding: 6px 9px;
+}
+
+.talkable-project-action:hover:not(:disabled),
+.talkable-pick-button:hover,
+.talkable-command-primary:hover,
+.talkable-undo-button:hover {
+  transform: translateY(-1px);
+}
+
+.talkable-project-action:disabled {
+  cursor: wait;
+  opacity: 0.66;
+}
+
+.talkable-expanded {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.talkable-target-card {
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid rgb(37 99 235 / 13%);
+  border-radius: 20px;
+  background: rgb(255 255 255 / 72%);
+  padding: 13px 14px;
+}
+
+.talkable-target-card[data-active="true"] {
+  border-color: rgb(14 165 233 / 30%);
+  background: rgb(240 249 255 / 80%);
+}
+
+.talkable-target-card p {
+  max-width: 210px;
+  margin: 0;
+  overflow: hidden;
+  color: #111827;
+  font-size: 13px;
+  font-weight: 850;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.talkable-target-actions {
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.talkable-pick-button {
+  border-color: rgb(37 99 235 / 18%);
+  border-radius: 14px;
+  background: #ffffff;
+  color: #1d4ed8;
+  font-size: 12px;
+  padding: 9px 11px;
+}
+
+.talkable-pick-button[data-active="true"] {
+  background: #1d4ed8;
+  color: #ffffff;
+}
+
+.talkable-voice-card {
+  gap: 16px;
+  border: 1px solid rgb(37 99 235 / 14%);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 26% 20%, rgb(37 99 235 / 15%), transparent 34%),
+    #ffffff;
+  box-shadow: 0 14px 34px rgb(15 17 23 / 8%);
+  padding: 18px;
+}
+
+.talkable-mic-button {
+  position: relative;
+  display: grid;
+  width: 78px;
+  height: 78px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #0ea5e9);
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow:
+    0 18px 34px rgb(37 99 235 / 34%),
+    inset 0 1px 0 rgb(255 255 255 / 28%);
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+
+.talkable-mic-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.talkable-mic-button:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.talkable-mic-button[data-listening="true"] {
+  background: linear-gradient(135deg, #dc2626, #2563eb);
+  box-shadow:
+    0 0 0 8px rgb(220 38 38 / 10%),
+    0 20px 42px rgb(37 99 235 / 44%);
+}
+
+.talkable-ring {
+  position: absolute;
+  inset: -8px;
+  border: 1px solid rgb(220 38 38 / 42%);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.talkable-mic-button[data-listening="true"] .talkable-ring {
+  animation: talkable-ring 1.8s ease-out infinite;
+}
+
+.talkable-mic-button[data-listening="true"] .talkable-ring-two {
+  animation-delay: 0.55s;
+}
+
+.talkable-voice-copy {
+  min-width: 0;
+}
+
+.talkable-voice-copy h3 {
+  margin: 0 0 4px;
+  color: #0f1117;
+  font-size: 18px;
+  font-weight: 850;
+  letter-spacing: 0;
+}
+
+.talkable-voice-copy p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.talkable-listening-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  border: 1px solid rgb(220 38 38 / 18%);
+  border-radius: 999px;
+  background: rgb(254 242 242 / 92%);
+  color: #b91c1c;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 5px 9px;
+}
+
+.talkable-listening-badge strong {
+  color: #1d4ed8;
+  font-variant-numeric: tabular-nums;
+}
+
+.talkable-listening-badge em {
+  color: #6b7280;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.talkable-command-row {
+  gap: 8px;
+  min-height: 34px;
+  margin-top: 12px;
+}
+
+.talkable-command-primary,
+.talkable-command-danger {
+  border-radius: 14px;
+  font-size: 12px;
+  padding: 9px 12px;
+}
+
+.talkable-command-primary {
+  background: #0f1117;
+  color: #ffffff;
+}
+
+.talkable-command-danger {
+  border-color: rgb(220 38 38 / 24%);
+  background: rgb(254 242 242 / 92%);
+  color: #b91c1c;
+}
+
+.talkable-command-danger:hover {
+  background: #fee2e2;
+  transform: translateY(-1px);
+}
+
+.talkable-transcript {
+  position: relative;
+  border: 1px solid rgb(15 17 23 / 7%);
+  border-radius: 22px 22px 22px 8px;
+  background: #0f1117;
+  color: #ffffff;
+  padding: 16px 18px;
+}
+
+.talkable-transcript::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 22px;
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  background: #0f1117;
+  transform: rotate(45deg);
+}
+
+.talkable-transcript span,
+.talkable-section-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #9ca3af;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.talkable-transcript p {
+  margin: 0;
+  color: #f9fafb;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.45;
+}
+
+.talkable-transcript p[data-empty="true"] {
+  color: #9ca3af;
+}
+
+.talkable-progress-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.talkable-step-card,
+.talkable-files-card,
+.talkable-notes-card {
+  border: 1px solid rgb(15 17 23 / 7%);
+  border-radius: 18px;
+  background: rgb(255 255 255 / 74%);
+  padding: 13px 14px;
+}
+
+.talkable-step-card {
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.talkable-step-card p {
+  margin: 0;
+  color: #10271a;
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.talkable-step-card time {
+  flex: 0 0 auto;
+  color: #16a34a;
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.talkable-panel-header {
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.talkable-files-card ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.talkable-files-card li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  color: #374151;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.talkable-files-card li svg {
+  flex: 0 0 auto;
+  color: #2563eb;
+}
+
+.talkable-files-card li span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.talkable-undo-button {
+  border-color: rgb(22 163 74 / 20%);
+  border-radius: 999px;
+  background: rgb(240 253 244 / 88%);
+  color: #15803d;
+  font-size: 11px;
+  padding: 7px 9px;
+}
+
+.talkable-notes-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.talkable-notes-toggle {
+  justify-content: space-between;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: #374151;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 850;
+  padding: 13px 14px;
+}
+
+.talkable-notes-toggle span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.talkable-notes-list {
+  display: grid;
+  gap: 8px;
+  border-top: 1px solid rgb(15 17 23 / 7%);
+  padding: 12px 14px 14px;
+}
+
+.talkable-notes-list p,
+.talkable-muted {
+  margin: 0;
+  color: #6b7280;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.talkable-notes-list p {
+  display: grid;
+  gap: 3px;
+}
+
+.talkable-notes-list time {
+  color: #9ca3af;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.talkable-pick-scrim {
+  position: fixed;
+  left: 50%;
+  top: 18px;
+  z-index: 2147483646;
+  border: 1px solid rgb(37 99 235 / 22%);
+  border-radius: 999px;
+  background: rgb(15 17 23 / 90%);
+  color: #ffffff;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 12px;
+  font-weight: 850;
+  padding: 9px 14px;
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.talkable-selection-box {
+  position: fixed;
+  z-index: 2147483645;
+  border: 2px solid #0ea5e9;
+  border-radius: 8px;
+  box-shadow:
+    0 0 0 4px rgb(14 165 233 / 18%),
+    0 12px 32px rgb(15 17 23 / 16%);
+  pointer-events: none;
+}
+
+.talkable-selection-box[data-kind="selected"] {
+  border-color: #16a34a;
+  box-shadow:
+    0 0 0 3px rgb(22 163 74 / 14%),
+    0 10px 24px rgb(15 17 23 / 12%);
+  animation: talkable-selected-pulse 1.45s ease-in-out infinite;
+}
+
+.talkable-selection-box[data-kind="selected"][data-editing="true"] {
+  border-color: #f59e0b;
+  box-shadow:
+    0 0 0 3px rgb(245 158 11 / 16%),
+    0 0 0 7px rgb(37 99 235 / 7%),
+    0 12px 30px rgb(15 17 23 / 14%);
+}
+
+.talkable-selection-box[data-kind="selected"]::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background: linear-gradient(
+      110deg,
+      transparent 0%,
+      rgb(255 255 255 / 0%) 35%,
+      rgb(255 255 255 / 70%) 48%,
+      rgb(34 197 94 / 55%) 56%,
+      transparent 70%
+    )
+    border-box;
+  mask:
+    linear-gradient(#000 0 0) padding-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask:
+    linear-gradient(#000 0 0) padding-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+  transform: translateX(-120%);
+  animation: talkable-selected-shimmer 1.6s ease-in-out infinite;
+}
+
+.talkable-selection-box[data-kind="selected"][data-editing="true"]::before {
+  background: linear-gradient(
+      110deg,
+      transparent 0%,
+      rgb(255 255 255 / 0%) 32%,
+      rgb(255 255 255 / 82%) 46%,
+      rgb(245 158 11 / 70%) 55%,
+      rgb(37 99 235 / 42%) 64%,
+      transparent 76%
+    )
+    border-box;
+  animation-duration: 1.05s;
+}
+
+.talkable-selection-box span {
+  position: absolute;
+  left: -2px;
+  top: -30px;
+  max-width: 260px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #0f1117;
+  color: #ffffff;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 11px;
+  font-weight: 850;
+  padding: 6px 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.talkable-selection-box[data-kind="selected"] span {
+  background: #15803d;
+}
+
+.talkable-selection-box[data-kind="selected"][data-editing="true"] span {
+  background: #b45309;
+}
+
+.talkable-selected-pill {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  z-index: 2147483646;
+  display: inline-flex;
+  align-items: center;
+  max-width: min(520px, calc(100vw - 32px));
+  gap: 8px;
+  border: 1px solid rgb(22 163 74 / 24%);
+  border-radius: 999px;
+  background: rgb(15 17 23 / 92%);
+  box-shadow: 0 14px 40px rgb(15 17 23 / 24%);
+  color: #ffffff;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 12px;
+  font-weight: 850;
+  padding: 9px 12px;
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.talkable-selected-pill svg {
+  flex: 0 0 auto;
+  color: #22c55e;
+}
+
+.talkable-selected-pill span {
+  color: #bbf7d0;
+  white-space: nowrap;
+}
+
+.talkable-selected-pill strong {
+  min-width: 0;
+  overflow: hidden;
+  color: #ffffff;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.talkable-widget[data-collapsed="true"] {
+  padding: 12px;
+}
+
+.talkable-widget[data-collapsed="true"] .talkable-project {
+  margin-top: 10px;
+}
+
+@keyframes talkable-live-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(34 197 94 / 48%);
+  }
+  100% {
+    box-shadow: 0 0 0 9px rgb(34 197 94 / 0%);
+  }
+}
+
+@keyframes talkable-ring {
+  0% {
+    opacity: 0.75;
+    transform: scale(0.82);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes talkable-selected-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 3px rgb(22 163 74 / 14%),
+      0 10px 24px rgb(15 17 23 / 12%);
+  }
+  50% {
+    box-shadow:
+      0 0 0 5px rgb(22 163 74 / 10%),
+      0 12px 28px rgb(15 17 23 / 14%);
+  }
+}
+
+@keyframes talkable-selected-shimmer {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@media (max-width: 520px) {
+  #talkable-widget-root {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .talkable-widget {
+    max-width: calc(100vw - 24px);
+  }
+
+  .talkable-target-card,
+  .talkable-panel-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .talkable-target-card p {
+    max-width: 100%;
+  }
+}

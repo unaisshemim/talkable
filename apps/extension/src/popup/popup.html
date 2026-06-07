@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Talkable Settings</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <form id="settings-form">
+      <label>
+        Backend URL
+        <input id="backend-url" name="backendUrl" type="url" required>
+      </label>
+      <label>
+        Project path
+        <span class="path-row">
+          <input id="project-path" name="projectPath" type="text" required placeholder="/absolute/path/to/project">
+          <button id="select-project-folder" class="secondary-button" type="button">Select folder</button>
+        </span>
+      </label>
+      <label>
+        Codex thread ID
+        <input id="codex-thread-id" name="codexThreadId" type="text" placeholder="Optional">
+      </label>
+      <button type="submit">Save</button>
+      <p id="status" role="status"></p>
+    </form>
+    <script src="popup.js"></script>
+  </body>
+</html>

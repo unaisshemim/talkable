@@ -1,0 +1,25 @@
+{
+  "name": "talkable",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Voice-controlled Codex Chrome extension and local backend.",
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build -w @talkable/shared && npm run build -w @talkable/server && npm run build -w @talkable/extension",
+    "check": "npm run check -w @talkable/shared && npm run build -w @talkable/shared && npm run check -w @talkable/server && npm run check -w @talkable/extension",
+    "dev": "concurrently -n server,react -c blue,green \"npm run dev:server\" \"npm run dev:react\"",
+    "dev:react": "npm run dev -w @talkable/react",
+    "dev:server": "npm run dev -w @talkable/server"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "typescript": "^5.8.3"
+  }
+}
